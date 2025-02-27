@@ -1,31 +1,27 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "jest.config.js",
   "scripts": {
-    "test": "jest",
-    "start": "npx ts-node src/server.ts",
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
+  "dependencies": {
+    "backend": "file:",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "express": "^4.21.2",
+    "pg": "^8.13.3",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.20"
+  },
   "devDependencies": {
     "@types/express": "^5.0.0",
-    "@types/jest": "^29.5.14",
     "@types/node": "^22.13.5",
-    "jest": "^29.7.0",
-    "supertest": "^7.0.0",
-    "ts-jest": "^29.2.6",
-    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.7.3"
-  },
-  "dependencies": {
-    "@prisma/client": "^6.4.1",
-    "backend": "file:",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2"
   }
 }
