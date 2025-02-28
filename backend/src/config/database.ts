@@ -11,8 +11,12 @@ export const AppDataSource = new DataSource({
     entities: ["src/entities/*.ts"],
     migrations: ["src/migrations/*.ts"],
     synchronize: true, // Apenas para ambiente de DEV
+    logging: false,
+    subscribers: []
 });
 
-AppDataSource.initialize()
-    .then(() => console.log("Banco conectado2"))
-    .catch((error) => console.log(error));
+export const inicializeDatabase = async () => {
+    await AppDataSource.initialize()
+        .then(() => console.log("Banco conectado"))
+        .catch((error) => console.log("Erro ao conectar com o banco de dados", error));
+}

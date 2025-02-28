@@ -1,15 +1,22 @@
 {
     "compilerOptions": {
-        "outDir": "./dist",
-        "rootDir": "./src",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "strict": true,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true
+      "target": "ES6",                      // ou "ES7", para suportar async/await
+      "module": "commonjs",                  // Para que seja compatível com Node.js
+      "strict": true,                        // Para garantir o modo estrito de tipagem
+      "esModuleInterop": true,               // Permite a importação de módulos CommonJS
+      "moduleResolution": "node",            // Faz a resolução de módulos como no Node.js
+      "skipLibCheck": true,                  // Ignora a verificação de tipos nas bibliotecas
+      "forceConsistentCasingInFileNames": true, // Garante que os nomes de arquivos sejam consistentes
+      "experimentalDecorators": true,        // Permite o uso de decorators
+      "emitDecoratorMetadata": true,         // Emite metadados necessários para bibliotecas como TypeORM
+      "outDir": "./dist",                    // Diretório de saída para os arquivos compilados
+      "rootDir": "./src",                    // Diretório raiz do código-fonte
+      "baseUrl": "./",                       // Base para resolução de módulos
+      "paths": {
+        "*": ["node_modules/*"]              // Mapeamento de caminhos
+      }
     },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", "dist"]
-}
+    "include": ["src/**/*.ts"],                // Inclui todos os arquivos TypeScript dentro da pasta src
+    "exclude": ["node_modules", "dist"]        // Exclui node_modules e dist da compilação
+  }
+  
