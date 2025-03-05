@@ -1,8 +1,7 @@
 module.exports = {
     preset: 'ts-jest',                      // Usa o preset do ts-jest para trabalhar com TypeScript
     testEnvironment: 'node',                // Define o ambiente de testes como Node.js
-    coverageDirectory: './coverage',       // Diretório onde os relatórios de cobertura de testes serão gerados
-    collectCoverage: true,                  // Habilita coleta de cobertura de testes
+    collectCoverage: false,                  // Habilita coleta de cobertura de testes
     setupFiles: ["dotenv/config"],
     globals: {
       'ts-jest': {
