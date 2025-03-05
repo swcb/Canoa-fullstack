@@ -1,5 +1,5 @@
 import { Delivery } from "../../entities/Delivery";
-import { testDataSource } from "../../config/data-source.test"; // Importa a configuração do banco de testes
+import { testDataSource } from "../../config/data-source.test";
 import { Repository } from "typeorm";
 import { DeliveryRepository } from "../../repositories/DeliveryRepositories";
 
