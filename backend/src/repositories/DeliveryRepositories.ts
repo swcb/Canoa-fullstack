@@ -1,13 +1,13 @@
 import { AppDataSource } from "../config/database";
-import { Repository } from "typeorm";
+import { DataSource, Repository } from "typeorm";
 import { Delivery } from "../entities/Delivery";
 
 export class DeliveryRepository {
     private repository: Repository<Delivery>;
 
 
-    constructor() {
-        this.repository = AppDataSource.getRepository(Delivery);
+    constructor(dataSource?: DataSource) {
+        this.repository = (dataSource || AppDataSource).getRepository(Delivery);
     }
 
 
@@ -19,5 +19,9 @@ export class DeliveryRepository {
 
     async findAll() {
         return this.repository.find();
+    }
+    
+    async findOneBy(delivery: Partial<Delivery>) {
+        return this.repository.findOneBy(delivery);
     }
 }

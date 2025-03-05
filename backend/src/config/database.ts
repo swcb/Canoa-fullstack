@@ -14,9 +14,3 @@ export const AppDataSource = new DataSource({
     logging: false,
     subscribers: []
 });
-
-export const inicializeDatabase = async () => {
-    await AppDataSource.initialize()
-        .then(() => console.log("Banco conectado"))
-        .catch((error) => console.log("Erro ao conectar com o banco de dados", error));
-}

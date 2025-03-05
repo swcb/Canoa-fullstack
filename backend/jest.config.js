@@ -3,6 +3,7 @@ module.exports = {
     testEnvironment: 'node',                // Define o ambiente de testes como Node.js
     coverageDirectory: './coverage',       // Diretório onde os relatórios de cobertura de testes serão gerados
     collectCoverage: true,                  // Habilita coleta de cobertura de testes
+    setupFiles: ["dotenv/config"],
     globals: {
       'ts-jest': {
         tsconfig: 'tsconfig.json',          // Utiliza o tsconfig.json configurado acima
