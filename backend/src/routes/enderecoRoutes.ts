@@ -1,15 +1,15 @@
 import { Router } from "express";
-//import { ProdutoController } from "../controllers/ClienteController";
+import { EnderecoController } from "../controllers/EnderecoController";
 
 const router = Router();
-//const produtoController = new ProdutoController();
+const enderecoController = new EnderecoController();
 
 
-//router.post("/", async (req, res) => {await produtoController.criarCliente(req, res)});
-//router.get("/", async (req, res) => {await produtoController.lerCliente(req, res)});
-//router.get("/all", async (req, res) => {await produtoController.lerTodosClientes(req, res)});
-//router.put("/", async (req, res) => {await produtoController.atualizarCliente(req, res)});
-//router.delete("/", async (req, res) => {await produtoController.excluirCliente(req, res)});
+router.post("/", async (req, res) => {await enderecoController.criarEndereco(req, res)});
+router.get("/", async (req, res) => {await enderecoController.lerEndereco(req, res)});
+router.get("/all", async (req, res) => {await enderecoController.lerTodosEnderecos(req, res)});
+router.put("/", async (req, res) => {await enderecoController.atualizarEndereco(req, res)});
+router.delete("/", async (req, res) => {await enderecoController.excluirEndereco(req, res)});
 
 
 export default router;

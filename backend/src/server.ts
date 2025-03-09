@@ -17,13 +17,3 @@ if (process.env.NODE_ENV !== "test") {
       console.error('Erro ao conectar no banco de dados:', error);
     });
 }
-
-/*
-export const createServer = async (dataSource: DataSource) => {
-    await dataSource.initialize();
-    console.log("Banco de testes conectado!");
-    
-    app.use("/deliveries", deliveryRoutes);
-    return app;
-};
-*/
