@@ -16,7 +16,7 @@ export class Produto {
     descricao!: string;
 
 
-    @Column('float')
+    @Column('float', { nullable: true })
     preco!: string;
 
 

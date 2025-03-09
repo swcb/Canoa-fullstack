@@ -1,53 +1,57 @@
-import { ClienteRepository } from "../repositories/ClienteRepositories";
+import { ClienteRepositories } from "../repositories/ClienteRepositories";
 import { Cliente } from "../entities/Cliente";
+import { Endereco } from "../entities/Endereco";
+import { Pedido } from "../entities/Pedido";
 
 
 interface ClienteDTO {
     nome: string;
     email?: string;
     telefone:string;
+    endereco?: Endereco;
+    pedidos?: Pedido[];
 }
 
 export class ClienteService {
-    private clienteRepository: ClienteRepository;
+    private clienteRepositories: ClienteRepositories;
 
     
     constructor() {
-        this.clienteRepository = new ClienteRepository();
+        this.clienteRepositories = new ClienteRepositories();
     }
 
 
     async criarCliente(clientData: ClienteDTO): Promise<Cliente> {
-        const cliente = await this.clienteRepository.create(clientData);
-        return this.clienteRepository.save(cliente);
+        const cliente = await this.clienteRepositories.create(clientData);
+        return this.clienteRepositories.save(cliente);
     }
 
 
     async lerTodosClientes(): Promise<Cliente[]> {
-        return this.clienteRepository.find();
+        return this.clienteRepositories.find();
     }
 
 
     async lerCliente(id: string): Promise<Cliente | null> {
-        return this.clienteRepository.findOne(id);
+        return this.clienteRepositories.findOne(id);
     }
 
 
     async atualizarCliente(id: string, clienteData: ClienteDTO): Promise<Cliente> {
-        const cliente = await this.clienteRepository.findOne(id);
+        const cliente = await this.clienteRepositories.findOne(id);
         if(!cliente){
             throw new Error('Cliente não encontrado');
         }
         Object.assign(cliente, clienteData);
-        return this.clienteRepository.save(cliente);
+        return this.clienteRepositories.save(cliente);
     }
 
 
     async excluirCliente(id: string): Promise<void> {
-        const cliente = await this.clienteRepository.findOne(id);
+        const cliente = await this.clienteRepositories.findOne(id);
         if(!cliente){
             throw new Error('Cliente não encontrado');
         }
-        await this.clienteRepository.remove(cliente);
+        await this.clienteRepositories.remove(cliente);
     }
 }
