@@ -4,7 +4,7 @@ import { Cliente } from "../entities/Cliente";
 
 
 
-export class ClienteRepository {
+export class ClienteRepositories {
     private repository: Repository<Cliente>;
 
 

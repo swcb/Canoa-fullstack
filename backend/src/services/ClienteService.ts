@@ -1,4 +1,4 @@
-import { ClienteRepository } from "../repositories/ClienteRepository";
+import { ClienteRepository } from "../repositories/ClienteRepositories";
 import { Cliente } from "../entities/Cliente";
 
 
