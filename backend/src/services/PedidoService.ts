@@ -7,7 +7,7 @@ import { Cliente } from "../entities/Cliente";
 interface PedidoDTO {
     dataCriacao: Date;
     dataLimiteEntrega?: Date;
-    prazoEndreta?:number;
+    prazoEntrega?:number;
     entregueEm?: Date;
     status?: string;
     pago?: boolean;
