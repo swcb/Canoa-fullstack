@@ -52,7 +52,7 @@ export class PedidoController {
 
     async atualizarPedido(req: Request, res:Response): Promise<Response> {
         const id = req.query.id as string | undefined;
-        
+
         if(!id) {
             return res.status(400).json({ message: "ID não fornecido" });
         }

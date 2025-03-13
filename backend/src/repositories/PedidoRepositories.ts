@@ -18,12 +18,17 @@ export class PedidoRepositories {
 
 
     async find():Promise<Pedido[]> {
-        return this.repository.find();
+        return this.repository.find({
+            relations: ["cliente", "itens"]
+        });
     }
 
 
     async findOne(id: string):Promise<Pedido | null> {
-        return this.repository.findOne({ where: {id} });
+        return this.repository.findOne({ 
+            where: {id},
+            relations: ["cliente", "itens"]
+        });
     }
 
 
