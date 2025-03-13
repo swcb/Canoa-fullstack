@@ -1,16 +1,7 @@
 import { ClienteRepositories } from "../repositories/ClienteRepositories";
 import { Cliente } from "../entities/Cliente";
-import { Endereco } from "../entities/Endereco";
-import { Pedido } from "../entities/Pedido";
+import { ClienteDTO } from "../dtos/ClienteDTO";
 
-
-interface ClienteDTO {
-    nome: string;
-    email?: string;
-    telefone:string;
-    endereco?: Endereco;
-    pedidos?: Pedido[];
-}
 
 export class ClienteService {
     private clienteRepositories: ClienteRepositories;

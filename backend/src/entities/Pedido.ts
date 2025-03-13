@@ -33,11 +33,16 @@ export class Pedido {
     pago!: boolean;
 
 
-    @ManyToOne(() => Cliente, cliente => cliente.pedidos)
+    @ManyToOne(() => Cliente, cliente => cliente.pedidos, {
+        onDelete: "SET NULL",
+        nullable: true
+    })
     cliente!: Cliente;
 
 
-    @ManyToMany(() => Produto, produto => produto.pedidos, { nullable: true })
+    @ManyToMany(() => Produto, produto => produto.pedidos, { 
+        onDelete: "SET NULL",
+        nullable: true })
     @JoinTable()
     itens!: Produto[];
 }

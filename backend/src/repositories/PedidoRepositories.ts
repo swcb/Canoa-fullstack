@@ -1,6 +1,7 @@
 import { AppDataSource } from "../config/database";
 import { Repository } from "typeorm";
 import { Pedido } from "../entities/Pedido";
+import { PedidoDTO } from "../dtos/PedidoDTO";
 
 
 export class PedidoRepositories {
@@ -12,7 +13,7 @@ export class PedidoRepositories {
     }
 
 
-    async create(pedido: Partial<Pedido>):Promise<Pedido> {
+    async create(pedido: PedidoDTO):Promise<Pedido> {
         return this.repository.create(pedido);
     }
 

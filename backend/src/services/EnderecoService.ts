@@ -1,19 +1,6 @@
 import { EnderecoRepositories } from "../repositories/EnderecoRepositorie";
 import { Endereco } from "../entities/Endereco";
-import { Cliente } from "../entities/Cliente";
-
-
-interface EnderecoDTO {
-    cep: string;
-    rua: string;
-    numero: string;
-    bairro: string;
-    cidade: string;
-    estado: string;
-    complemento?: string;
-    referencia: string;
-    clientes?: Cliente[];
-}
+import { EnderecoDTO } from "../dtos/EnderecoDTO";
 
 
 export class EnderecoService {

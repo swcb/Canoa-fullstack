@@ -1,16 +1,8 @@
 import { Request, Response } from "express";
 import { ProdutoService } from "../services/ProdutoService";
-import { Pedido } from "../entities/Pedido";
-
-
-interface ProdutoDTO {
-    nome: string;
-    descricao?: string;
-    preco?: string;
-    categoria?: string;
-    subcategoria?: string;
-    pedidos?: Pedido[];
-}
+import { ProdutoDTO } from "../dtos/ProdutoDTO";
+import { validate } from "class-validator";
+import { plainToClass } from "class-transformer";
 
 
 export class ProdutoController{
@@ -23,6 +15,12 @@ export class ProdutoController{
 
 
     async criarProduto(req: Request, res:Response): Promise<Response> {
+        const produtoDTO = plainToClass(ProdutoDTO, req.body);
+        const erros = await validate(produtoDTO);
+        if(erros.length > 0){
+            return res.status(400).json({ errors: erros });
+        }
+
         const produtoData: ProdutoDTO = req.body;
         const produto = await this.produtoService.criarProduto(produtoData);
         return res.status(201).json(produto);
@@ -52,6 +50,12 @@ export class ProdutoController{
         
         if(!id) {
             return res.status(400).json({ message: "ID não fornecido" });
+        }
+
+        const produtoDTO = plainToClass(ProdutoDTO, req.body);
+        const erros = await validate(produtoDTO);
+        if(erros.length > 0){
+            return res.status(400).json({ errors: erros });
         }
 
         const produtoData: ProdutoDTO = req.body;

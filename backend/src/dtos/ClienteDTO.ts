@@ -13,7 +13,7 @@ export class ClienteDTO {
     email?:string;
 
 
-    @IsPhoneNumber(undefined)
+    @IsPhoneNumber("BR")
     telefone!: string;
 
 

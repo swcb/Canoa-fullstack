@@ -28,6 +28,9 @@ export class Produto {
     subcategoria!: string;
 
 
-    @ManyToMany(() => Pedido, pedido => pedido.itens)
+    @ManyToMany(() => Pedido, pedido => pedido.itens, {
+        onDelete: "SET NULL",
+        nullable: true
+    })
     pedidos!: Pedido[];
 }

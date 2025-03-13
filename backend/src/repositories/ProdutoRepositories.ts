@@ -1,6 +1,7 @@
 import { AppDataSource } from "../config/database";
 import { Repository } from "typeorm";
 import { Produto } from "../entities/Produto";
+import { ProdutoDTO } from "../dtos/ProdutoDTO";
 
 export class ProdutoRepositories {
     private repository: Repository<Produto>;
@@ -11,18 +12,21 @@ export class ProdutoRepositories {
     }
 
 
-    async create(produto: Partial<Produto>): Promise<Produto> {
+    async create(produto: ProdutoDTO): Promise<Produto> {
         return this.repository.create(produto);
     }
 
 
     async find(): Promise<Produto[]> {
-        return this.repository.find();
+        return this.repository.find({ relations: ["pedidos"] });
     }
 
 
     async findOne(id: string): Promise<Produto | null> {
-        return this.repository.findOne({ where: {id}});
+        return this.repository.findOne({ 
+            where: {id},
+            relations: ["pedidos"]
+        });
     }
 
 

@@ -1,6 +1,7 @@
 import { AppDataSource } from "../config/database";
 import { Repository } from "typeorm";
 import { Cliente } from "../entities/Cliente";
+import { ClienteDTO } from "../dtos/ClienteDTO";
 
 
 
@@ -13,18 +14,21 @@ export class ClienteRepositories {
     }
 
 
-    async create(cliente: Partial<Cliente>): Promise<Cliente> {
+    async create(cliente: ClienteDTO): Promise<Cliente> {
         return this.repository.create(cliente);
     }
 
 
     async find(): Promise<Cliente[]> {
-        return this.repository.find();
+        return this.repository.find({ relations: ["endereco", "pedidos"] });
     }
 
 
     async findOne(id: string): Promise<Cliente | null> {
-        return this.repository.findOne({ where: {id} });
+        return this.repository.findOne({ 
+            where: {id},
+            relations: ["endereco", "pedidos"]
+         });
     }
 
 

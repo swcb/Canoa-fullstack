@@ -1,19 +1,8 @@
 import { Request, Response } from "express";
 import { EnderecoService } from "../services/EnderecoService";
-import { Cliente } from "../entities/Cliente";
-
-
-interface EnderecoDTO {
-    cep: string;
-    rua: string;
-    numero: string;
-    bairro: string;
-    cidade: string;
-    estado: string;
-    complemento?: string;
-    referencia: string;
-    clientes?: Cliente[];
-}
+import { EnderecoDTO } from "../dtos/EnderecoDTO";
+import { validate } from "class-validator";
+import { plainToClass } from "class-transformer";
 
 
 export class EnderecoController {
@@ -26,6 +15,12 @@ export class EnderecoController {
 
 
     async criarEndereco(req: Request, res: Response): Promise<Response> {
+        const enderecoDTO = plainToClass(EnderecoDTO, req.body);
+        const erros = await validate(enderecoDTO);
+        if(erros.length > 0){
+            return res.status(400).json({ errors: erros });
+        }
+
         const enderecoData: EnderecoDTO = req.body
         const endereco = await this.enderecoService.criarEndereco(enderecoData);
         return res.status(201).json(endereco);
@@ -55,6 +50,12 @@ export class EnderecoController {
         
         if(!id) {
             return res.status(400).json({ message: "ID não fornecido" });
+        }
+
+        const enderecoDTO = plainToClass(EnderecoDTO, req.body);
+        const erros = await validate(enderecoDTO);
+        if(erros.length > 0){
+            return res.status(400).json({ errors: erros });
         }
 
         const enderecoData: EnderecoDTO = req.body

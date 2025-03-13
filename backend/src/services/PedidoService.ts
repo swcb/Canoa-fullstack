@@ -1,19 +1,7 @@
 import { PedidoRepositories } from "../repositories/PedidoRepositories";
 import { Pedido } from "../entities/Pedido";
-import { Produto } from "../entities/Produto";
-import { Cliente } from "../entities/Cliente";
+import { PedidoDTO } from "../dtos/PedidoDTO";
 
-
-interface PedidoDTO {
-    dataCriacao: Date;
-    dataLimiteEntrega?: Date;
-    prazoEntrega?:number;
-    entregueEm?: Date;
-    status?: string;
-    pago?: boolean;
-    cliente?: Cliente;
-    itens?: Produto[];
-}
 
 export class PedidoService {
     private pedidoRepositories: PedidoRepositories;

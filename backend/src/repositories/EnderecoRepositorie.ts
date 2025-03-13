@@ -2,6 +2,7 @@
 import { AppDataSource } from "../config/database";
 import { Repository } from "typeorm";
 import { Endereco } from "../entities/Endereco";
+import { EnderecoDTO } from "../dtos/EnderecoDTO";
 
 
 export class EnderecoRepositories {
@@ -13,18 +14,21 @@ export class EnderecoRepositories {
     }
 
 
-    async create(endereco: Partial<Endereco>): Promise<Endereco> {
+    async create(endereco: EnderecoDTO): Promise<Endereco> {
         return this.repository.create(endereco);
     }
 
 
     async find(): Promise<Endereco[]> {
-        return this.repository.find();
+        return this.repository.find({ relations: ["clientes"] });
     }
 
 
     async findOne(id: string): Promise<Endereco | null> {
-        return this.repository.findOne({ where: {id} });
+        return this.repository.findOne({ 
+            where: {id},
+            relations: ["clientes"]
+        });
     }
 
 

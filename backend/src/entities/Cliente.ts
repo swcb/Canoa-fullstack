@@ -21,10 +21,16 @@ export class Cliente {
     telefone!: string;
 
 
-    @ManyToOne(() => Endereco, endereco => endereco.clientes)
+    @ManyToOne(() => Endereco, endereco => endereco.clientes, {
+        onDelete: "SET NULL",
+        nullable: true
+    })
     endereco!: Endereco;
 
 
-    @OneToMany(() => Pedido, pedido => pedido.cliente, { nullable: true })
+    @OneToMany(() => Pedido, pedido => pedido.cliente, { 
+        onDelete: "SET NULL",
+        nullable: true 
+    })
     pedidos!: Pedido[];
 }

@@ -1,19 +1,8 @@
 import { Request, Response } from "express";
 import { ClienteService } from "../services/ClienteService";
-import { Pedido } from "../entities/Pedido";
-import { Endereco } from "../entities/Endereco";
-//import { ClienteDTO } from "src/dtos/ClienteDTO";
-//import { validate } from "class-validator/types";
-//import { plainToClass } from "class-transformer/types";
-
-
-interface ClienteDTO {
-    nome: string;
-    email?: string;
-    telefone:string;
-    endereco?: Endereco;
-    pedidos?: Pedido[];
-}
+import { ClienteDTO } from "../dtos/ClienteDTO";
+import { validate } from "class-validator";
+import { plainToClass } from "class-transformer";
 
 
 export class ClienteController {
@@ -26,6 +15,12 @@ export class ClienteController {
 
     
     async criarCliente(req: Request, res:Response): Promise<Response> {
+        const clienteDTO = plainToClass(ClienteDTO, req.body);
+        const erros = await validate(clienteDTO);
+        if(erros.length > 0){
+            return res.status(400).json({ errors: erros });
+        }
+
         const clienteData: ClienteDTO = req.body;
         const cliente = await this.clienteService.criarCliente(clienteData);
         return res.status(201).json(cliente);
@@ -57,6 +52,12 @@ export class ClienteController {
             return res.status(400).json({ message: "ID não fornecido" });
         }
 
+        const clienteDTO = plainToClass(ClienteDTO, req.body);
+        const erros = await validate(clienteDTO);
+        if(erros.length > 0){
+            return res.status(400).json({ errors: erros });
+        }
+        
         const clienteData: ClienteDTO = req.body;
         const cliente = await this.clienteService.atualizarCliente(id, clienteData);
         return res.status(200).json(cliente);

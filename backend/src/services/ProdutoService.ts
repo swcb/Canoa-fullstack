@@ -1,16 +1,6 @@
 import { ProdutoRepositories } from "../repositories/ProdutoRepositories";
 import { Produto } from "../entities/Produto";
-import { Pedido } from "../entities/Pedido";
-
-
-interface ProdutoDTO {
-    nome: string;
-    descricao?: string;
-    preco?: string;
-    categoria?: string;
-    subcategoria?: string;
-    pedidos?: Pedido[];
-}
+import { ProdutoDTO } from "../dtos/ProdutoDTO";
 
 
 export class ProdutoService {
