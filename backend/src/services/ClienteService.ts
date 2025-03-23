@@ -1,6 +1,7 @@
 import { ClienteRepositories } from "../repositories/ClienteRepositories";
 import { Cliente } from "../entities/Cliente";
 import { ClienteDTO } from "../dtos/ClienteDTO";
+import { ApplicationError } from "../errors/ApplicationError";
 
 
 export class ClienteService {
@@ -13,8 +14,12 @@ export class ClienteService {
 
 
     async criarCliente(clientData: ClienteDTO): Promise<Cliente> {
-        const cliente = await this.clienteRepositories.create(clientData);
-        return this.clienteRepositories.save(cliente);
+        try {
+            const cliente = await this.clienteRepositories.create(clientData);
+            return this.clienteRepositories.save(cliente);
+        } catch (err) {
+            throw new ApplicationError('Erro ao salvar o Cliente no Banco de Dados');
+        }
     }
 
 

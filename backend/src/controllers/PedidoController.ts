@@ -3,6 +3,7 @@ import { PedidoService } from "../services/PedidoService";
 import { PedidoDTO } from "../dtos/PedidoDTO";
 import { validate } from "class-validator";
 import { plainToClass } from "class-transformer";
+import { ValidationError } from "../errors/ValidationError";
 
 
 export class PedidoController {
@@ -18,7 +19,7 @@ export class PedidoController {
         const pedidoDTO = plainToClass(PedidoDTO, req.body);
         const erros = await validate(pedidoDTO);
         if(erros.length > 0){
-            return res.status(400).json({ errors: erros });
+            throw new ValidationError('Dados de Pedido inválidos')
         }
         
         const pedidoData: PedidoDTO = req.body;
@@ -37,7 +38,7 @@ export class PedidoController {
         const id = req.query.id as string | undefined;
         
         if(!id) {
-            return res.status(400).json({ message: "ID não fornecido" });
+            throw new ValidationError('ID não fornecido');
         } 
 
         const pedido = await this.pedidoService.lerPedido(id);
@@ -49,13 +50,13 @@ export class PedidoController {
         const id = req.query.id as string | undefined;
 
         if(!id) {
-            return res.status(400).json({ message: "ID não fornecido" });
+            throw new ValidationError('ID não fornecido')
         }
 
         const pedidoDTO = plainToClass(PedidoDTO, req.body);
         const erros = await validate(pedidoDTO);
         if(erros.length > 0){
-            return res.status(400).json({ errors: erros });
+            throw new ValidationError('Dados de Pedido inválidos');
         }
         
         const pedidoData: PedidoDTO = req.body;
@@ -68,7 +69,7 @@ export class PedidoController {
         const id = req.query.id as string | undefined;
         
         if(!id) {
-            return res.status(400).json({ message: "ID não fornecido" });
+            throw new ValidationError('ID não fornecido');
         }
         
         await this.pedidoService.excluirPedido(id);

@@ -3,6 +3,7 @@ import { EnderecoService } from "../services/EnderecoService";
 import { EnderecoDTO } from "../dtos/EnderecoDTO";
 import { validate } from "class-validator";
 import { plainToClass } from "class-transformer";
+import { ValidationError } from "../errors/ValidationError";
 
 
 export class EnderecoController {
@@ -18,7 +19,7 @@ export class EnderecoController {
         const enderecoDTO = plainToClass(EnderecoDTO, req.body);
         const erros = await validate(enderecoDTO);
         if(erros.length > 0){
-            return res.status(400).json({ errors: erros });
+            throw new ValidationError('Dados de Endereço inválidos');
         }
 
         const enderecoData: EnderecoDTO = req.body
@@ -37,7 +38,7 @@ export class EnderecoController {
         const id = req.query.id as string | undefined;
         
         if(!id) {
-            return res.status(400).json({ message: "ID não fornecido" });
+            throw new ValidationError('ID não fornecido');
         }
 
         const endereco = await this.enderecoService.LerEndereco(id);
@@ -49,13 +50,13 @@ export class EnderecoController {
         const id = req.query.id as string | undefined;
         
         if(!id) {
-            return res.status(400).json({ message: "ID não fornecido" });
+            throw new ValidationError('ID não fornecido');
         }
 
         const enderecoDTO = plainToClass(EnderecoDTO, req.body);
         const erros = await validate(enderecoDTO);
         if(erros.length > 0){
-            return res.status(400).json({ errors: erros });
+            throw new ValidationError('Dados de Endereço inválidos');
         }
 
         const enderecoData: EnderecoDTO = req.body
@@ -68,7 +69,7 @@ export class EnderecoController {
         const id = req.query.id as string | undefined;
         
         if(!id) {
-            return res.status(400).json({ message: "ID não fornecido" });
+            throw new ValidationError('ID não fornecido');
         }
 
         await this.enderecoService.excluirEndereco(id);
