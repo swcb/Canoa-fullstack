@@ -14,7 +14,7 @@ export class Cliente {
 
 
     @Column({ nullable: true })
-    email!: string;
+    email?: string;
 
     
     @Column()
@@ -25,12 +25,12 @@ export class Cliente {
         onDelete: "SET NULL",
         nullable: true
     })
-    endereco!: Endereco;
+    endereco?: Endereco;
 
 
     @OneToMany(() => Pedido, pedido => pedido.cliente, { 
         onDelete: "SET NULL",
         nullable: true 
     })
-    pedidos!: Pedido[];
+    pedidos?: Pedido[];
 }
